@@ -31,7 +31,9 @@ module.exports = function (app) {
         noteMap.push(note);
       });
 
-      res.send(noteMap);
+      console.log(noteMap);
+
+      res.send(JSON.stringify(noteMap));
     });
   });
 

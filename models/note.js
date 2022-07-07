@@ -3,7 +3,7 @@ const Note = mongoose.model(
   "Note",
   new mongoose.Schema({
     title: String,
-    Description: String,
+    description: String,
   })
 );
 module.exports = Note;

@@ -3,9 +3,10 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const app = express();
 const db = require("./models");
+const EmailSender = "./sendEmail.js";
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:3000",
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -83,3 +84,15 @@ require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/note.routes")(app);
 require("./routes/userd.routes")(app);
+
+//send email
+
+app.post("/send", async (req, res) => {
+  try {
+    const { fullName, email, phone, message } = req.body;
+    EmailSender({ fullName, email, phone, message });
+    res.json({ msg: "Your message sent successfully" });
+  } catch (error) {
+    res.status(404).json({ msg: "Error ❌" });
+  }
+});

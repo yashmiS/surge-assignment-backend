@@ -58,7 +58,14 @@ function initial() {
         }
         console.log("added 'user' to roles collection");
       });
-
+      new Role({
+        name: "student",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+        console.log("added 'student' to roles collection");
+      });
       new Role({
         name: "admin",
       }).save((err) => {
@@ -75,3 +82,4 @@ function initial() {
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/note.routes")(app);
+require("./routes/userd.routes")(app);

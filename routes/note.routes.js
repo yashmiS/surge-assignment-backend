@@ -34,4 +34,35 @@ module.exports = function (app) {
       res.send(noteMap);
     });
   });
+
+  // app.post("/update", async (req, res) => {
+  //   try {
+  //     const note = req.body;
+
+  //     const filter = { title: note.title };
+  //     const update = note;
+
+  //     let doc = await Note.findOneAndUpdate(filter, update, {
+  //       new: true,
+  //     });
+
+  //     res.send(doc);
+  //   } catch (error) {
+  //     res.status(500).send(JSON.stringify({ message: error.message }));
+  //   }
+  // });
+
+  app.post("/delete", async (req, res) => {
+    try {
+      const { title } = req.body;
+
+      const filter = { title: title };
+
+      let doc = await Note.findOneAndDelete(filter);
+
+      res.send(doc);
+    } catch (error) {
+      res.status(500).send(JSON.stringify({ message: error.message }));
+    }
+  });
 };
